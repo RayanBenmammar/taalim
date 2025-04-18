@@ -8,6 +8,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Text, Card } from 'react-native-paper';
 import { ArabicLetter } from '../data/alphabet';
+import * as Speech from 'expo-speech';
+import { IconButton } from 'react-native-paper';
+
 
 export type FlipCardRef = {
     flipIfBack: () => void;
@@ -24,6 +27,14 @@ const FlipCard = forwardRef<FlipCardRef, Props>(({ letter }: Props, ref) => {   
         const newRotation = flipped ? 0 : 180;
         rotation.value = withTiming(newRotation, { duration: 500 });
         setFlipped(!flipped);
+    };
+
+    const speakLetter = (text: string) => {
+        Speech.speak(text, {
+            language: 'ar-SA',
+            pitch: 1,
+            rate: 0.8,
+        });
     };
 
     useImperativeHandle(ref, () => ({
@@ -58,8 +69,15 @@ const FlipCard = forwardRef<FlipCardRef, Props>(({ letter }: Props, ref) => {   
             <View style={styles.container}>
                 <Animated.View style={[styles.card, frontStyle]}>
                     <Card style={styles.cardInner}>
-                        <Card.Content>
+                        <Card.Content style={styles.contentContainer}>
                             <Text style={styles.letter}>{letter.letter}</Text>
+                            <IconButton
+                                icon="volume-high"
+                                size={32}
+                                onPress={() => speakLetter(letter.letter)}
+                                style={styles.soundButton}
+                                accessibilityLabel="Lire la lettre à haute voix"
+                            />
                         </Card.Content>
                     </Card>
                 </Animated.View>
@@ -95,10 +113,19 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
+    contentContainer: {
+        flex: 1,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        paddingVertical: 20,
+    },
     letter: {
         fontSize: 100,
         textAlign: 'center',
     },
+    soundButton: {
+        marginTop: 10,
+    }
 });
 
 export default FlipCard;
