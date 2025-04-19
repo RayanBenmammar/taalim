@@ -4,18 +4,46 @@ import { View, StyleSheet} from 'react-native';
 import FlipCard, {FlipCardRef} from "../components/flipCard";
 import {Button} from "react-native-paper";
 
-const getRandomLetter = () => {
-    return arabicAlphabet[Math.floor(Math.random() * arabicAlphabet.length)];
-}
+const HISTORY_SIZE = 10;
+
+const useLetterSelection = () => {
+    const [usedLetters, setUsedLetters] = useState<string[]>([]);
+    const [currentLetter, setCurrentLetter] = useState(() => {
+        const letter = arabicAlphabet[Math.floor(Math.random() * arabicAlphabet.length)];
+        return letter;
+    });
+
+    const getNextLetter = () => {
+        const availableLetters = arabicAlphabet.filter(
+            letter => !usedLetters.includes(letter.letter)
+        );
+
+        if (availableLetters.length === 0) {
+            const randomLetter = arabicAlphabet[Math.floor(Math.random() * arabicAlphabet.length)];
+            setUsedLetters([randomLetter.letter]);
+            setCurrentLetter(randomLetter);
+            return;
+        }
+
+        const selectedLetter = availableLetters[Math.floor(Math.random() * availableLetters.length)];
+        setUsedLetters(prev => {
+            const newHistory = [...prev, selectedLetter.letter];
+            return newHistory.slice(-HISTORY_SIZE);
+        });
+        setCurrentLetter(selectedLetter);
+    };
+
+    return { currentLetter, getNextLetter };
+};
 
 export default function HomeScreen() {
-    const [currentLetter, setCurrentLetter] = useState(getRandomLetter());
+    const { currentLetter, getNextLetter } = useLetterSelection();
     const cardRef = useRef<FlipCardRef>(null);
 
     const handleNext = () => {
         cardRef.current?.flipIfBack();
         setTimeout(() => {
-            setCurrentLetter(getRandomLetter());
+            getNextLetter()
         }, 200);
     };
 
