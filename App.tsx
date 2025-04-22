@@ -1,10 +1,15 @@
 import {PaperProvider} from "react-native-paper";
-import HomeScreen from './src/screens/homeScreen';
+import Navigation from "./src/navigation";
+import {StatusBar} from "expo-status-bar";
+import {SafeAreaProvider} from "react-native-safe-area-context";
 
 export default function App() {
   return (
-      <PaperProvider>
-        <HomeScreen />
-      </PaperProvider>
+      <SafeAreaProvider>
+          <PaperProvider>
+              <Navigation />
+              <StatusBar style="auto" />
+          </PaperProvider>
+      </SafeAreaProvider>
   );
 }
