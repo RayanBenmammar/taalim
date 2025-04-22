@@ -122,6 +122,8 @@ const styles = StyleSheet.create({
     letter: {
         fontSize: 100,
         textAlign: 'center',
+        writingDirection: 'rtl',
+        fontFamily: 'NotoNaskhArabic'
     },
     soundButton: {
         marginTop: 10,

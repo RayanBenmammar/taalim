@@ -1,6 +1,6 @@
 export const categories = [
     { id: 'alphabet', name: 'Alphabet Arabe' },
-    { id: 'voyelles-courtes', name: 'Voyelles Courtes' },
-    { id: 'voyelles-longues', name: 'Voyelles Longues' },
-    { id: 'formes-lettres', name: 'Formes des lettres' },
+    { id: 'shortVowels', name: 'Voyelles Courtes' },
+    { id: 'longVowels', name: 'Voyelles Longues' },
+    { id: 'letterForms', name: 'Formes des lettres' },
 ];

@@ -2,26 +2,27 @@ import {View, Text, StyleSheet} from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation';
 import {useRef, useState} from "react";
-import {arabicAlphabet} from "../data/alphabet";
+import {arabicAlphabet, ArabicLetter} from "../data/alphabet";
 import FlipCard, {FlipCardRef} from "../components/flipCard";
 import {Button} from "react-native-paper";
+import {arabicWithShortVowels} from "../data/shortVowels";
 
 const HISTORY_SIZE = 10;
 
-const useLetterSelection = () => {
+const useLetterSelection = (array : ArabicLetter[]) => {
     const [usedLetters, setUsedLetters] = useState<string[]>([]);
     const [currentLetter, setCurrentLetter] = useState(() => {
-        const letter = arabicAlphabet[Math.floor(Math.random() * arabicAlphabet.length)];
+        const letter = array[Math.floor(Math.random() * array.length)];
         return letter;
     });
 
     const getNextLetter = () => {
-        const availableLetters = arabicAlphabet.filter(
+        const availableLetters = array.filter(
             letter => !usedLetters.includes(letter.letter)
         );
 
         if (availableLetters.length === 0) {
-            const randomLetter = arabicAlphabet[Math.floor(Math.random() * arabicAlphabet.length)];
+            const randomLetter = array[Math.floor(Math.random() * array.length)];
             setUsedLetters([randomLetter.letter]);
             setCurrentLetter(randomLetter);
             return;
@@ -42,8 +43,17 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Learning'>;
 
 export default function LearningScreen({ route } : Props) {
     const { category } = route.params;
-
-    const { currentLetter, getNextLetter } = useLetterSelection();
+    const getLettersArray = () => {
+        switch (category) {
+            case 'alphabet':
+                return arabicAlphabet;
+            case 'shortVowels':
+                return arabicWithShortVowels;
+            default:
+                return arabicAlphabet;
+        }
+    };
+    const { currentLetter, getNextLetter } = useLetterSelection(getLettersArray());
     const cardRef = useRef<FlipCardRef>(null);
 
     const handleNext = () => {
