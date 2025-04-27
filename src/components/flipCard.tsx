@@ -7,7 +7,6 @@ import Animated, {
     interpolate,
 } from 'react-native-reanimated';
 import { Text, Card } from 'react-native-paper';
-import { ArabicLetter } from '../data/alphabet';
 import * as Speech from 'expo-speech';
 import { IconButton } from 'react-native-paper';
 
@@ -17,10 +16,11 @@ export type FlipCardRef = {
 };
 
 type Props = {
-    letter: ArabicLetter;
+    letter: any;
 };
 
-const FlipCard = forwardRef<FlipCardRef, Props>(({ letter }: Props, ref) => {    const [flipped, setFlipped] = useState(false);
+const FlipCard = forwardRef<FlipCardRef, Props>(({ letter }: Props, ref) => {
+    const [flipped, setFlipped] = useState(false);
     const rotation = useSharedValue(0);
 
     const flip = () => {

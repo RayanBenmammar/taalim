@@ -1,115 +1,45 @@
-import {ArabicLetter} from "./alphabet";
+import {LearningCardData} from "./learning";
 
-export const arabicWithShortVowels: ArabicLetter[] = [
-    { letter: 'اَ', name: 'Alif + Fatha', pronunciation: 'a (comme dans "âne")' },
-    { letter: 'اِ', name: 'Alif + Kasra', pronunciation: 'i (comme dans "si")' },
-    { letter: 'اُ', name: 'Alif + Damma', pronunciation: 'u (comme dans "soup")' },
+export const arabicWithShortVowels: LearningCardData[] = [
+    {
+        id: 'short-vowels-intro',
+        title: 'Introduction aux voyelles courtes',
+        contentDescription: 'Dans cette section, vous apprendrez les voyelles courtes de l\'arabe. Ces voyelles sont des signes diacritiques qui se placent au-dessus ou en-dessous des lettres : Fatha (   َ   ), Kasra (  ِ   ) et Damma (    ُ   ).',
+        type: 'intro'
+    },
+    {
+        id: 'fatha-intro',
+        title: 'La Fatha (  َ   )',
+        contentDescription: 'La fatha est un petit trait horizontal placé au-dessus de la lettre. Elle produit le son "a" court comme dans "patte". Dans la transcription, elle est notée "a".',
+        type: 'intro'
+    },
+    { id: 'ba-fatha', title: 'Ba + Fatha', content: 'بَ', contentDescription: 'ba (comme dans "bal")', contentPronunciation: 'بَ', type: 'letter' },
+    { id: 'da-fatha', title: 'Dal + Fatha', content: 'دَ', contentDescription: 'da (comme dans "date")', contentPronunciation: 'دَ', type: 'letter' },
+    { id: 'ma-fatha', title: 'Mim + Fatha', content: 'مَ', contentDescription: 'ma (comme dans "mal")', contentPronunciation: 'مَ', type: 'letter' },
 
-    { letter: 'بَ', name: 'Ba + Fatha', pronunciation: 'b (comme dans "bateau")' },
-    { letter: 'بِ', name: 'Ba + Kasra', pronunciation: 'b (comme dans "bateau")' },
-    { letter: 'بُ', name: 'Ba + Damma', pronunciation: 'b (comme dans "bateau")' },
+    {
+        id: 'kasra-intro',
+        title: 'La Kasra (  ِ   )',
+        contentDescription: 'La kasra est un petit trait horizontal placé sous la lettre. Elle produit le son "i" court comme dans "lit". Dans la transcription, elle est notée "i".',
+        type: 'intro'
+    },
+    { id: 'bi-kasra', title: 'Ba + Kasra', content: 'بِ', contentDescription: 'bi (comme dans "bit")', contentPronunciation: 'بِ', type: 'letter' },
+    { id: 'di-kasra', title: 'Dal + Kasra', content: 'دِ', contentDescription: 'di (comme dans "dit")', contentPronunciation: 'دِ', type: 'letter' },
+    { id: 'mi-kasra', title: 'Mim + Kasra', content: 'مِ', contentDescription: 'mi (comme dans "mis")', contentPronunciation: 'مِ', type: 'letter' },
 
-    { letter: 'تَ', name: 'Ta + Fatha', pronunciation: 't (comme dans "télé")' },
-    { letter: 'تِ', name: 'Ta + Kasra', pronunciation: 't (comme dans "télé")' },
-    { letter: 'تُ', name: 'Ta + Damma', pronunciation: 't (comme dans "télé")' },
-
-    { letter: 'ثَ', name: 'Tha + Fatha', pronunciation: 'th (comme dans "think" en anglais)' },
-    { letter: 'ثِ', name: 'Tha + Kasra', pronunciation: 'th (comme dans "think" en anglais)' },
-    { letter: 'ثُ', name: 'Tha + Damma', pronunciation: 'th (comme dans "think" en anglais)' },
-
-    { letter: 'جَ', name: 'Jim + Fatha', pronunciation: 'j (comme dans "je") ou "g" doux (comme "gentil")' },
-    { letter: 'جِ', name: 'Jim + Kasra', pronunciation: 'j (comme dans "je") ou "g" doux (comme "gentil")' },
-    { letter: 'جُ', name: 'Jim + Damma', pronunciation: 'j (comme dans "je") ou "g" doux (comme "gentil")' },
-
-    { letter: 'حَ', name: 'Ha + Fatha', pronunciation: 'ḥ (h expiré, plus profond que "h")' },
-    { letter: 'حِ', name: 'Ha + Kasra', pronunciation: 'ḥ (h expiré, plus profond que "h")' },
-    { letter: 'حُ', name: 'Ha + Damma', pronunciation: 'ḥ (h expiré, plus profond que "h")' },
-
-    { letter: 'خَ', name: 'Kha + Fatha', pronunciation: 'kh (comme le "j" espagnol ou "Bach")' },
-    { letter: 'خِ', name: 'Kha + Kasra', pronunciation: 'kh (comme le "j" espagnol ou "Bach")' },
-    { letter: 'خُ', name: 'Kha + Damma', pronunciation: 'kh (comme le "j" espagnol ou "Bach")' },
-
-    { letter: 'دَ', name: 'Dal + Fatha', pronunciation: 'd (comme dans "don")' },
-    { letter: 'دِ', name: 'Dal + Kasra', pronunciation: 'd (comme dans "don")' },
-    { letter: 'دُ', name: 'Dal + Damma', pronunciation: 'd (comme dans "don")' },
-
-    { letter: 'ذَ', name: 'Dhal + Fatha', pronunciation: 'dh (comme "this" en anglais)' },
-    { letter: 'ذِ', name: 'Dhal + Kasra', pronunciation: 'dh (comme "this" en anglais)' },
-    { letter: 'ذُ', name: 'Dhal + Damma', pronunciation: 'dh (comme "this" en anglais)' },
-
-    { letter: 'رَ', name: 'Ra + Fatha', pronunciation: 'r roulé (comme en espagnol)' },
-    { letter: 'رِ', name: 'Ra + Kasra', pronunciation: 'r roulé (comme en espagnol)' },
-    { letter: 'رُ', name: 'Ra + Damma', pronunciation: 'r roulé (comme en espagnol)' },
-
-    { letter: 'زَ', name: 'Zay + Fatha', pronunciation: 'z (comme dans "zèbre")' },
-    { letter: 'زِ', name: 'Zay + Kasra', pronunciation: 'z (comme dans "zèbre")' },
-    { letter: 'زُ', name: 'Zay + Damma', pronunciation: 'z (comme dans "zèbre")' },
-
-    { letter: 'سَ', name: 'Sin + Fatha', pronunciation: 's (comme dans "soleil")' },
-    { letter: 'سِ', name: 'Sin + Kasra', pronunciation: 's (comme dans "soleil")' },
-    { letter: 'سُ', name: 'Sin + Damma', pronunciation: 's (comme dans "soleil")' },
-
-    { letter: 'شَ', name: 'Shin + Fatha', pronunciation: 'sh (comme dans "chat")' },
-    { letter: 'شِ', name: 'Shin + Kasra', pronunciation: 'sh (comme dans "chat")' },
-    { letter: 'شُ', name: 'Shin + Damma', pronunciation: 'sh (comme dans "chat")' },
-
-    { letter: 'صَ', name: 'Sad + Fatha', pronunciation: 'ṣ (s emphatique, plus appuyé)' },
-    { letter: 'صِ', name: 'Sad + Kasra', pronunciation: 'ṣ (s emphatique, plus appuyé)' },
-    { letter: 'صُ', name: 'Sad + Damma', pronunciation: 'ṣ (s emphatique, plus appuyé)' },
-
-    { letter: 'ضَ', name: 'Dad + Fatha', pronunciation: 'ḍ (d emphatique, propre à l’arabe)' },
-    { letter: 'ضِ', name: 'Dad + Kasra', pronunciation: 'ḍ (d emphatique, propre à l’arabe)' },
-    { letter: 'ضُ', name: 'Dad + Damma', pronunciation: 'ḍ (d emphatique, propre à l’arabe)' },
-
-    { letter: 'طَ', name: 'Taʼ + Fatha', pronunciation: 'ṭ (t emphatique, plus appuyé)' },
-    { letter: 'طِ', name: 'Taʼ + Kasra', pronunciation: 'ṭ (t emphatique, plus appuyé)' },
-    { letter: 'طُ', name: 'Taʼ + Damma', pronunciation: 'ṭ (t emphatique, plus appuyé)' },
-
-    { letter: 'ظَ', name: 'Zaʼ + Fatha', pronunciation: 'ẓ (z emphatique, proche de "the")' },
-    { letter: 'ظِ', name: 'Zaʼ + Kasra', pronunciation: 'ẓ (z emphatique, proche de "the")' },
-    { letter: 'ظُ', name: 'Zaʼ + Damma', pronunciation: 'ẓ (z emphatique, proche de "the")' },
-
-    { letter: 'عَ', name: 'Ayn + Fatha', pronunciation: 'ʿ (son guttural, difficile à prononcer)' },
-    { letter: 'عِ', name: 'Ayn + Kasra', pronunciation: 'ʿ (son guttural, difficile à prononcer)' },
-    { letter: 'عُ', name: 'Ayn + Damma', pronunciation: 'ʿ (son guttural, difficile à prononcer)' },
-
-    { letter: 'غَ', name: 'Ghayn + Fatha', pronunciation: 'gh (comme le "r" français au fond de la gorge)' },
-    { letter: 'غِ', name: 'Ghayn + Kasra', pronunciation: 'gh (comme le "r" français au fond de la gorge)' },
-    { letter: 'غُ', name: 'Ghayn + Damma', pronunciation: 'gh (comme le "r" français au fond de la gorge)' },
-
-    { letter: 'فَ', name: 'Fa + Fatha', pronunciation: 'f (comme dans "fleur")' },
-    { letter: 'فِ', name: 'Fa + Kasra', pronunciation: 'f (comme dans "fleur")' },
-    { letter: 'فُ', name: 'Fa + Damma', pronunciation: 'f (comme dans "fleur")' },
-
-    { letter: 'قَ', name: 'Qaf + Fatha', pronunciation: 'q (k profond, au fond de la gorge)' },
-    { letter: 'قِ', name: 'Qaf + Kasra', pronunciation: 'q (k profond, au fond de la gorge)' },
-    { letter: 'قُ', name: 'Qaf + Damma', pronunciation: 'q (k profond, au fond de la gorge)' },
-
-    { letter: 'كَ', name: 'Kaf + Fatha', pronunciation: 'k (comme dans "kilo")' },
-    { letter: 'كِ', name: 'Kaf + Kasra', pronunciation: 'k (comme dans "kilo")' },
-    { letter: 'كُ', name: 'Kaf + Damma', pronunciation: 'k (comme dans "kilo")' },
-
-    { letter: 'لَ', name: 'Lam + Fatha', pronunciation: 'l (comme dans "lune")' },
-    { letter: 'لِ', name: 'Lam + Kasra', pronunciation: 'l (comme dans "lune")' },
-    { letter: 'لُ', name: 'Lam + Damma', pronunciation: 'l (comme dans "lune")' },
-
-    { letter: 'مَ', name: 'Mim + Fatha', pronunciation: 'm (comme dans "maman")' },
-    { letter: 'مِ', name: 'Mim + Kasra', pronunciation: 'm (comme dans "maman")' },
-    { letter: 'مُ', name: 'Mim + Damma', pronunciation: 'm (comme dans "maman")' },
-
-    { letter: 'نَ', name: 'Nun + Fatha', pronunciation: 'n (comme dans "neige")' },
-    { letter: 'نِ', name: 'Nun + Kasra', pronunciation: 'n (comme dans "neige")' },
-    { letter: 'نُ', name: 'Nun + Damma', pronunciation: 'n (comme dans "neige")' },
-
-    { letter: 'هَ', name: 'Haʼ + Fatha', pronunciation: 'h (comme dans "héros")' },
-    { letter: 'هِ', name: 'Haʼ + Kasra', pronunciation: 'h (comme dans "héros")' },
-    { letter: 'هُ', name: 'Haʼ + Damma', pronunciation: 'h (comme dans "héros")' },
-
-    { letter: 'وَ', name: 'Waw + Fatha', pronunciation: 'w (comme dans "water") ou "ou" (comme dans "loup")' },
-    { letter: 'وِ', name: 'Waw + Kasra', pronunciation: 'w (comme dans "water") ou "ou" (comme dans "loup")' },
-    { letter: 'وُ', name: 'Waw + Damma', pronunciation: 'w (comme dans "water") ou "ou" (comme dans "loup")' },
-
-    { letter: 'يَ', name: 'Yaʼ + Fatha', pronunciation: 'y (comme dans "yoga") ou "i" (comme dans "île")' },
-    { letter: 'يِ', name: 'Yaʼ + Kasra', pronunciation: 'y (comme dans "yoga") ou "i" (comme dans "île")' },
-    { letter: 'يُ', name: 'Yaʼ + Damma', pronunciation: 'y (comme dans "yoga") ou "i" (comme dans "île")' },
+    {
+        id: 'damma-intro',
+        title: 'La Damma (  ُ   )',
+        contentDescription: 'La damma est un petit واو placé au-dessus de la lettre. Elle produit le son "ou" court comme dans "bout". Dans la transcription, elle est notée "u".',
+        type: 'intro'
+    },
+    { id: 'bu-damma', title: 'Ba + Damma', content: 'بُ', contentDescription: 'bou (comme dans "bout")', contentPronunciation: 'بُ', type: 'letter' },
+    { id: 'du-damma', title: 'Dal + Damma', content: 'دُ', contentDescription: 'dou (comme dans "doux")', contentPronunciation: 'دُ', type: 'letter' },
+    { id: 'mu-damma', title: 'Mim + Damma', content: 'مُ', contentDescription: 'mou (comme dans "mou")', contentPronunciation: 'مُ', type: 'letter' },
+    {
+        id: 'short-vowels-outro',
+        title: 'Félicitations !',
+        contentDescription: 'Vous avez terminé l\'apprentissage des voyelles courtes en arabe ! Vous pouvez maintenant passer au quiz pour tester vos connaissances.',
+        type: 'outro'
+    }
 ];
