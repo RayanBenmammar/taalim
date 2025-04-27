@@ -4,5 +4,4 @@ export const categories = [
     { id: 'longVowels', name: 'Voyelles Longues' },
     { id : 'sukun',name: 'Absence de voyelle' },
     { id: 'chadda', name: 'Doublement de consonne' },
-    // { id: 'letterForms', name: 'Formes des lettres' },
 ];

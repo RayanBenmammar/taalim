@@ -1,74 +1,60 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation';
-import {arabicAlphabet} from "../data/alphabet";
-import {arabicWithShortVowels} from "../data/shortVowels";
 import {useRef, useState} from "react";
 import FlipCard, {FlipCardRef} from "../components/flipCard";
 import {Button} from "react-native-paper";
-import {LearningCardData} from "../data/learning";
+import {QuizCardData} from "../data/quiz/quiz";
+import {arabicAlphabetQuiz} from "../data/quiz/alphabet";
 
-const HISTORY_SIZE = 10;
+const useCardNavigation = (array: QuizCardData[]) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentCard, setCurrentCard] = useState(array[0]);
 
-const useLetterSelection = (array : LearningCardData[]) => {
-    const [usedLetters, setUsedLetters] = useState<string[]>([]);
-    const [currentLetter, setCurrentLetter] = useState(() => {
-        const letter = array[Math.floor(Math.random() * array.length)];
-        return letter;
-    });
-
-    const getNextLetter = () => {
-        const availableLetters = array.filter(
-            letter => !usedLetters.includes(letter.content)
-        );
-
-        if (availableLetters.length === 0) {
-            const randomLetter = array[Math.floor(Math.random() * array.length)];
-            setUsedLetters([randomLetter.content]);
-            setCurrentLetter(randomLetter);
-            return;
-        }
-
-        const selectedLetter = availableLetters[Math.floor(Math.random() * availableLetters.length)];
-        setUsedLetters(prev => {
-            const newHistory = [...prev, selectedLetter.content];
-            return newHistory.slice(-HISTORY_SIZE);
-        });
-        setCurrentLetter(selectedLetter);
+    const getNextCard = () => {
+        const nextIndex = (currentIndex + 1) % array.length;
+        setCurrentIndex(nextIndex);
+        setCurrentCard(array[nextIndex]);
     };
 
-    return { currentLetter, getNextLetter };
+    return { currentIndex, currentCard, getNextCard };
 };
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Quiz'>;
 
 export default function QuizScreen({ route }: Props) {
     const { category } = route.params;
-    const getLettersArray = () => {
+    const getCardsArray = () => {
         switch (category) {
             case 'alphabet':
-                return arabicAlphabet;
-            case 'shortVowels':
-                return arabicWithShortVowels;
+                return arabicAlphabetQuiz ;
             default:
-                return arabicAlphabet;
+                return arabicAlphabetQuiz;
         }
     };
-    const { currentLetter, getNextLetter } = useLetterSelection(getLettersArray());
+    const { currentIndex,currentCard, getNextCard } = useCardNavigation(getCardsArray());
     const cardRef = useRef<FlipCardRef>(null);
 
     const handleNext = () => {
         cardRef.current?.flipIfBack();
         setTimeout(() => {
-            getNextLetter()
+            getNextCard()
         }, 200);
+    };
+
+    const handleAnswer = () => {
+        cardRef.current?.displayBack();
     };
     return (
         <View style={styles.container}>
-            <Text>Learning for: {category}</Text>
-            <FlipCard ref={cardRef} letter={currentLetter} />
+            <FlipCard ref={cardRef} card={currentCard} />
+            { currentCard.possibleAnswers.map(answer => (
+                <Button key={answer} mode="contained" onPress={handleAnswer} style={styles.button}>
+                    {answer}
+                </Button>
+            ))}
             <Button mode="contained" onPress={handleNext} style={styles.button}>
-                Lettre suivante
+                Question suivante
             </Button>
         </View>
     );

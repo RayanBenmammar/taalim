@@ -2,7 +2,7 @@ import { StyleSheet, View,  } from 'react-native';
 import { Text, Card } from 'react-native-paper';
 import * as Speech from 'expo-speech';
 import { IconButton } from 'react-native-paper';
-import {LearningCardData} from "../data/learning";
+import {LearningCardData} from "../data/learning/learning";
 
 
 type Props = {

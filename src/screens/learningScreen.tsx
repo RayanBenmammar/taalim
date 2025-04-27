@@ -1,15 +1,15 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation';
 import {useState} from "react";
-import {arabicAlphabet} from "../data/alphabet";
+import {arabicAlphabet} from "../data/learning/alphabet";
 import {Button} from "react-native-paper";
-import {arabicWithShortVowels} from "../data/shortVowels";
-import {LearningCardData} from "../data/learning";
+import {arabicWithShortVowels} from "../data/learning/shortVowels";
+import {LearningCardData} from "../data/learning/learning";
 import LearningCard from "../components/learningCard";
-import {arabicWithLongVowels} from "../data/longVowels";
-import {sukun} from "../data/sukun";
-import {chadda} from "../data/chadda";
+import {arabicWithLongVowels} from "../data/learning/longVowels";
+import {sukun} from "../data/learning/sukun";
+import {chadda} from "../data/learning/chadda";
 
 const useCardNavigation = (array: LearningCardData[]) => {
     const [currentIndex, setCurrentIndex] = useState(0);

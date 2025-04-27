@@ -7,19 +7,19 @@ import Animated, {
     interpolate,
 } from 'react-native-reanimated';
 import { Text, Card } from 'react-native-paper';
-import * as Speech from 'expo-speech';
-import { IconButton } from 'react-native-paper';
+import {QuizCardData} from "../data/quiz/quiz";
 
 
 export type FlipCardRef = {
     flipIfBack: () => void;
+    displayBack: () => void;
 };
 
 type Props = {
-    letter: any;
+    card: QuizCardData;
 };
 
-const FlipCard = forwardRef<FlipCardRef, Props>(({ letter }: Props, ref) => {
+const FlipCard = forwardRef<FlipCardRef, Props>(({ card }: Props, ref) => {
     const [flipped, setFlipped] = useState(false);
     const rotation = useSharedValue(0);
 
@@ -29,17 +29,14 @@ const FlipCard = forwardRef<FlipCardRef, Props>(({ letter }: Props, ref) => {
         setFlipped(!flipped);
     };
 
-    const speakLetter = (text: string) => {
-        Speech.speak(text, {
-            language: 'ar-SA',
-            pitch: 1,
-            rate: 0.8,
-        });
-    };
-
     useImperativeHandle(ref, () => ({
         flipIfBack: () => {
             if (flipped) {
+                flip();
+            }
+        },
+        displayBack: () => {
+            if (!flipped) {
                 flip();
             }
         },
@@ -65,27 +62,20 @@ const FlipCard = forwardRef<FlipCardRef, Props>(({ letter }: Props, ref) => {
     }));
 
     return (
-        <Pressable onPress={flip}>
+        <Pressable>
             <View style={styles.container}>
                 <Animated.View style={[styles.card, frontStyle]}>
                     <Card style={styles.cardInner}>
                         <Card.Content style={styles.contentContainer}>
-                            <Text style={styles.letter}>{letter.letter}</Text>
-                            <IconButton
-                                icon="volume-high"
-                                size={32}
-                                onPress={() => speakLetter(letter.letter)}
-                                style={styles.soundButton}
-                                accessibilityLabel="Lire la lettre à haute voix"
-                            />
+                            <Text style={styles.question}>{card.question}</Text>
                         </Card.Content>
                     </Card>
                 </Animated.View>
                 <Animated.View style={[styles.card, backStyle]}>
                     <Card style={styles.cardInner}>
                         <Card.Content>
-                            <Text variant="titleLarge">{letter.name}</Text>
-                            <Text>{letter.pronunciation}</Text>
+                            <Text variant="titleLarge">{card.answer}</Text>
+                            <Text>{card.answerDescription}</Text>
                         </Card.Content>
                     </Card>
                 </Animated.View>
@@ -119,8 +109,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 20,
     },
-    letter: {
-        fontSize: 100,
+    question: {
+        fontSize: 20,
         textAlign: 'center',
         writingDirection: 'rtl',
         fontFamily: 'NotoNaskhArabic'
